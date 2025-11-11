@@ -4,18 +4,21 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-            <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+                <flux:sidebar sticky stashable class="border-e" style="border-color: #ffd700; background-color: #ffffff;">
+            <flux:sidebar.toggle class="lg:hidden" icon="x-mark" style="color: #212121;" />
 
-            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate style="color: #212121;">
                 <x-app-logo />
             </a>
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate :class="request()->routeIs('dashboard') ? 'border-l-4' : ''" style="color: #212121; transition: all 0.2s;" :style="request()->routeIs('dashboard') ? 'border-color: #ffd700 !important' : ''">{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="" :href="route('product.management')" :current="request()->routeIs('product.management')" wire:navigate :class="request()->routeIs('product.management') ? 'border-l-4' : ''" style="color: #212121; transition: all 0.2s;" :style="request()->routeIs('product.management') ? 'border-color: #ffd700 !important' : ''">{{ __('Product Management') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
+
+
 
             <flux:spacer />
 

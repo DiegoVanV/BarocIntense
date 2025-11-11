@@ -12,6 +12,18 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('product-management', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.management');
+    Route::get('product-management/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('product.management.create');
+    Route::post('product-management', [\App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
+    Route::get('product-management/{product}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
+    Route::put('product-management/{product}', [\App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+    Route::delete('product-management/{product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+});
+
+
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
