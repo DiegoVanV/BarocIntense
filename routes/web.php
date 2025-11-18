@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +12,10 @@ Route::get('/', function () {
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('departments/{department}', [DepartmentController::class, 'show'])
+    ->name('departments.show')
+    ->middleware(['auth', 'verified']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
