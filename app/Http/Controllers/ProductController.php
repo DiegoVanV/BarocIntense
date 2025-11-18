@@ -36,9 +36,9 @@ class ProductController extends Controller
 
         $categories = Product::getCategories();
         $stockStatuses = [
-            'in_stock' => __('In Stock'),
-            'almost_empty' => __('Almost Out of Stock'),
-            'empty' => __('Out of Stock'),
+            'in_stock' => __('Op voorraad'),
+            'almost_empty' => __('Bijna op'),
+            'empty' => __('Uitverkocht'),
         ];
 
         return view('ProductManegement.main', compact('products', 'categories', 'stockStatuses'));
@@ -70,7 +70,7 @@ class ProductController extends Controller
         Product::create($validated);
 
         return redirect()->route('product.management')
-            ->with('success', 'Product successfully created!');
+            ->with('success', 'Product succesvol aangemaakt!');
     }
 
     /**
@@ -99,7 +99,7 @@ class ProductController extends Controller
         $product->update($validated);
 
         return redirect()->route('product.management')
-            ->with('success', 'Product successfully updated!');
+            ->with('success', 'Product succesvol bijgewerkt!');
     }
 
     /**
@@ -110,6 +110,6 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.management')
-            ->with('success', 'Product successfully deleted!');
+            ->with('success', 'Product succesvol verwijderd!');
     }
 }

@@ -20,6 +20,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('product-management/{product}/edit', [\App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
     Route::put('product-management/{product}', [\App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
     Route::delete('product-management/{product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
+    Route::get('departments', [\App\Http\Controllers\DepartmentController::class, 'index'])->name('departments.index');
+    Route::get('departments/{department}', [\App\Http\Controllers\DepartmentController::class, 'show'])->name('departments.show');
 });
 
 

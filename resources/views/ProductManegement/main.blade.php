@@ -1,16 +1,15 @@
-<x-layouts.app :title="__('Product Management')">
+<x-layouts.app :title="__('Productbeheer')">
     <div class="py-6 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="flex justify-between items-center mb-6">
                 <div>
-                    <h1 class="text-3xl font-bold" style="color: #212121">{{ __('Product Management') }}</h1>
-
+                    <h1 class="text-3xl font-bold" style="color: #212121">{{ __('Productbeheer') }}</h1>
                 </div>
                 <a href="{{ route('product.management.create') }}" class="inline-flex items-center px-4 py-2 text-white rounded-lg transition" style="background-color: #ffd700; color: #212121; hover: background-color: #ffed4e;">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                    {{ __('Add Product') }}
+                    {{ __('Product toevoegen') }}
                 </a>
             </div>
 
@@ -25,9 +24,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <!-- Category Filter -->
                     <div>
-                        <label for="category" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">{{ __('Category') }}</label>
+                        <label for="category" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">{{ __('Categorie') }}</label>
                         <select id="category" name="category" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">-- {{ __('All Categories') }} --</option>
+                            <option value="">-- {{ __('Alle categorieën') }} --</option>
                             @foreach ($categories as $cat)
                                 <option value="{{ $cat }}" {{ request('category') === $cat ? 'selected' : '' }}>
                                     {{ $cat }}
@@ -36,11 +35,10 @@
                         </select>
                     </div>
 
-
                     <div>
-                        <label for="stock_status" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">{{ __('Stock Status') }}</label>
+                        <label for="stock_status" class="block text-sm font-medium text-gray-900 dark:text-white mb-2">{{ __('Voorraadstatus') }}</label>
                         <select id="stock_status" name="stock_status" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">-- {{ __('All Statuses') }} --</option>
+                            <option value="">-- {{ __('Alle statussen') }} --</option>
                             @foreach ($stockStatuses as $key => $label)
                                 <option value="{{ $key }}" {{ request('stock_status') === $key ? 'selected' : '' }}>
                                     {{ $label }}
@@ -52,11 +50,11 @@
                     <!-- Filter Actions -->
                     <div class="flex items-end gap-2">
                         <button type="submit" class="w-full px-4 py-2 text-white rounded-lg transition font-medium" style="background-color: #ffd700; color: #212121;">
-                            {{ __('Filter') }}
+                            {{ __('Filteren') }}
                         </button>
                         @if (request()->filled('category') || request()->filled('stock_status'))
                             <a href="{{ route('product.management') }}" class="px-4 py-2 rounded-lg transition font-medium" style="border: 2px solid #ffd700; color: #212121; background-color: white;">
-                                {{ __('Clear') }}
+                                {{ __('Wissen') }}
                             </a>
                         @endif
                     </div>
@@ -69,13 +67,13 @@
                     <table class="w-full">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Product Name') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Productnaam') }}</th>
                                 <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Code') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Category') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Price') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Stock') }}</th>
-                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Installation Cost') }}</th>
-                                <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">{{ __('Actions') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Categorie') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Prijs') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Voorraad') }}</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white">{{ __('Installatiekosten') }}</th>
+                                <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 dark:text-white">{{ __('Acties') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -90,15 +88,14 @@
                                             <span class="text-xl font-bold" style="color: #212121; min-width: 40px;">{{ $product->voorraad }}</span>
                                             @if ($product->voorraad > 5)
                                                 <span class="px-3 py-1 text-xs font-medium rounded-full text-white whitespace-nowrap">
-
                                                 </span>
                                             @elseif ($product->voorraad > 0)
                                                 <span class="px-3 py-1 text-xs font-medium rounded-full text-white whitespace-nowrap" style="background-color: #f39c12;">
-                                                    Almost out of stock
+                                                    {{ __('Bijna uitverkocht') }}
                                                 </span>
                                             @else
                                                 <span class="px-3 py-1 text-xs font-medium rounded-full text-white whitespace-nowrap" style="background-color: #e74c3c;">
-                                                    out of stock
+                                                    {{ __('Uitverkocht') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -113,7 +110,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                 </svg>
                                             </a>
-                                            <form action="{{ route('product.destroy', $product) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure?')">
+                                            <form action="{{ route('product.destroy', $product) }}" method="POST" class="inline" onsubmit="return confirm('{{ __('Weet je het zeker?') }}')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="transition" style="color: #e74c3c;">
@@ -134,14 +131,14 @@
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
                     </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('No products') }}</h3>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('Get started by creating a new product.') }}</p>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Geen producten') }}</h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('Begin door een nieuw product aan te maken.') }}</p>
                     <div class="mt-6">
                         <a href="{{ route('product.management.create') }}" class="inline-flex items-center px-4 py-2 text-white rounded-lg transition" style="background-color: #ffd700; color: #212121;">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
-                            {{ __('Add your first product') }}
+                            {{ __('Voeg je eerste product toe') }}
                         </a>
                     </div>
                 </div>
