@@ -18,6 +18,26 @@
                 </flux:navlist.group>
             </flux:navlist>
 
+            @php
+                $user = auth()->user();
+            @endphp
+
+            @if($user && $user->isManager())
+                <flux:navlist class="mt-4" variant="outline">
+                    <flux:navlist.group :heading="__('Departments')" class="grid">
+                        @foreach(\App\Models\Department::all() as $d)
+                            <flux:navlist.item :href="route('departments.show', $d)" :current="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $d->id" wire:navigate :class="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $d->id ? 'border-l-4' : ''" style="color: #212121;" :style="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $d->id ? 'border-color: #ffd700 !important' : ''">{{ $d->name }}</flux:navlist.item>
+                        @endforeach
+                    </flux:navlist.group>
+                </flux:navlist>
+            @elseif($user && $user->department)
+                <flux:navlist class="mt-4" variant="outline">
+                    <flux:navlist.group :heading="__('Department')" class="grid">
+                        <flux:navlist.item :href="route('departments.show', $user->department)" :current="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $user->department->id" wire:navigate :class="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $user->department->id ? 'border-l-4' : ''" style="color: #212121;" :style="request()->routeIs('departments.show') && request()->route('department') && request()->route('department')->id == $user->department->id ? 'border-color: #ffd700 !important' : ''">{{ $user->department->name }}</flux:navlist.item>
+                    </flux:navlist.group>
+                </flux:navlist>
+            @endif
+
 
 
             <flux:spacer />
