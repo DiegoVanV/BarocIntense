@@ -11,16 +11,15 @@
                 <x-app-logo />
             </a>
 
-            <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate :class="request()->routeIs('dashboard') ? 'border-l-4' : ''" style="color: #212121; transition: all 0.2s;" :style="request()->routeIs('dashboard') ? 'border-color: #ffd700 !important' : ''">{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="" :href="route('product.management')" :current="request()->routeIs('product.management')" wire:navigate :class="request()->routeIs('product.management') ? 'border-l-4' : ''" style="color: #212121; transition: all 0.2s;" :style="request()->routeIs('product.management') ? 'border-color: #ffd700 !important' : ''">{{ __('Product Management') }}</flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
-
             @php
                 $user = auth()->user();
             @endphp
+
+            <flux:navlist variant="outline">
+                <flux:navlist.group :heading="__('')" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate :class="request()->routeIs('dashboard') ? 'border-l-4' : ''" style="color: #212121; transition: all 0.2s;" :style="request()->routeIs('dashboard') ? 'border-color: #ffd700 !important' : ''">{{ __('Dashboard') }}</flux:navlist.item>
+                </flux:navlist.group>
+            </flux:navlist>
 
             @if($user && $user->isManager())
                 <flux:navlist class="mt-4" variant="outline">

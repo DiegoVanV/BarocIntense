@@ -82,7 +82,7 @@
                                     <td class="px-6 py-4 text-sm text-gray-900 dark:text-white font-medium">{{ $product->naam }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $product->product_code }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $product->categorie }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-white font-semibold">€ {{ number_format($product->prijs, 2) }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-white font-semibold">€ {{ number_format((float) ($product->prijs ?? 0), 2) }}</td>
                                     <td class="px-6 py-4 text-sm">
                                         <div class="flex items-center justify-between gap-3">
                                             <span class="text-xl font-bold" style="color: #212121; min-width: 40px;">{{ $product->voorraad }}</span>
@@ -101,7 +101,7 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
-                                        {{ $product->installatiekosten ? '€ ' . number_format($product->installatiekosten, 2) : '-' }}
+                                        {{ $product->installatiekosten !== null ? '€ ' . number_format((float) $product->installatiekosten, 2) : '-' }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-center">
                                         <div class="flex justify-center gap-2">

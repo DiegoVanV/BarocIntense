@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     /**
      * Show all products (product management main page) with optional filtering
+     * Only managers can access this (authorization check)
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+
+        // Only managers can access product management
+        if (! $user->isManager()) {
+            abort(403);
+        }
+
         $query = Product::query();
 
         if ($request->filled('category')) {
