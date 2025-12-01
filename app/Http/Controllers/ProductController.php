@@ -17,7 +17,6 @@ class ProductController extends Controller
     {
         $user = Auth::user();
 
-        // Only managers can access product management
         if (! $user->isManager()) {
             abort(403);
         }
