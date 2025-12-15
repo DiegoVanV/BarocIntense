@@ -68,7 +68,7 @@ class User extends Authenticatable
         return $this->role === 'manager';
     }
 
-    
+
     /**
      * Get the user's initials
      */

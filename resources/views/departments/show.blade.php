@@ -12,6 +12,10 @@
             @elseif($department->slug === 'onderhoud')
                 @include('departments.sections.onderhoud')
 
+            @elseif($department->slug === 'sales')
+                @include('sales.index')
+
+
             @else
                 <div class="bg-white rounded-lg shadow p-4">
                     <p class="text-gray-700">

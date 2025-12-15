@@ -29,6 +29,11 @@ class DepartmentController extends Controller
             abort(403);
         }
 
+        // If this is the Onderhoud department, redirect to the maintenance UI
+        if ($department->slug === 'onderhoud') {
+            return redirect()->route('maintenance.index');
+        }
+
         return view('departments.show', compact('department'));
     }
 

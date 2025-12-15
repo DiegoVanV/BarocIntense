@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\MaintenanceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,7 +19,6 @@ Route::get('departments/{department}', [DepartmentController::class, 'show'])
     ->name('departments.show')
     ->middleware(['auth', 'verified']);
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('product-management', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.management');
     Route::get('product-management/create', [\App\Http\Controllers\ProductController::class, 'create'])->name('product.management.create');
@@ -28,9 +29,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('departments', [DepartmentController::class, 'index'])->name('departments.index');
     Route::get('departments/{department}', [DepartmentController::class, 'show'])->name('departments.show');
+
+    Route::get('maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
+    Route::get('maintenance/machines/{machine}', [MaintenanceController::class, 'show'])->name('maintenance.show');
+
+    Route::get('sales', [SalesController::class, 'index'])->name('sales.index');
+    Route::post('/sales/add/{product}', [SalesController::class, 'add'])->name('sales.add');
+
 });
-
-
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

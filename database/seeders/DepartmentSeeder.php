@@ -14,20 +14,14 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create departments
         $products = Department::firstOrCreate(
             ['name' => 'Products'],
             ['slug' => 'products']
         );
 
-        $automaten = Department::firstOrCreate(
-            ['name' => 'Automaten'],
-            ['slug' => 'automaten']
-        );
-
-        $koffiebonen = Department::firstOrCreate(
-            ['name' => 'Koffiebonen'],
-            ['slug' => 'koffiebonen']
+        $sales = Department::firstOrCreate(
+            ['name' => 'Sales'],
+            ['slug' => 'sales']
         );
 
         $onderhoud = Department::firstOrCreate(
@@ -35,7 +29,6 @@ class DepartmentSeeder extends Seeder
             ['slug' => 'onderhoud']
         );
 
-        // Create test users
         User::firstOrCreate(
             ['email' => 'manager@example.com'],
             [
@@ -48,23 +41,12 @@ class DepartmentSeeder extends Seeder
         );
 
         User::firstOrCreate(
-            ['email' => 'automaten@example.com'],
+            ['email' => 'sales@example.com'],
             [
-                'name' => 'Automaten Employee',
+                'name' => 'Sales Employee',
                 'password' => bcrypt('password'),
                 'role' => 'employee',
-                'department_id' => $automaten->id,
-                'email_verified_at' => now(),
-            ]
-        );
-
-        User::firstOrCreate(
-            ['email' => 'koffiebonen@example.com'],
-            [
-                'name' => 'Koffiebonen Employee',
-                'password' => bcrypt('password'),
-                'role' => 'employee',
-                'department_id' => $koffiebonen->id,
+                'department_id' => $sales->id,
                 'email_verified_at' => now(),
             ]
         );
